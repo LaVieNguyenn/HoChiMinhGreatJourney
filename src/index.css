@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ho Chi Minh Journey Design System */
+
+@layer base {
+  :root {
+    /* Light Theme - Tươi sáng với nền trắng */
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    /* Revolutionary Red - Màu đỏ cách mạng */
+    --primary: 0 84% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 0 84% 68%;
+
+    /* Golden Star - Màu vàng ngôi sao */  
+    --secondary: 45 93% 58%;
+    --secondary-foreground: 224 71.4% 4.1%;
+    --secondary-glow: 45 93% 68%;
+
+    /* Homeland Green - Màu xanh quê hương */
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 142 71% 55%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 0 84% 58%;
+
+    --radius: 0.75rem;
+
+    /* Journey Gradients */
+    --gradient-revolutionary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-golden: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
+    --gradient-homeland: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-map: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1), hsl(var(--accent) / 0.1));
+
+    /* Journey Shadows */
+    --shadow-revolutionary: 0 10px 40px -10px hsl(var(--primary) / 0.3);
+    --shadow-golden: 0 10px 40px -10px hsl(var(--secondary) / 0.3);
+    --shadow-homeland: 0 10px 40px -10px hsl(var(--accent) / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(224 71.4% 4.1% / 0.1);
+
+    /* Journey Animations */
+    --transition-journey: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 40% 98%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Revolutionary Red - Màu đỏ cách mạng */
+    --primary: 0 84% 65%;
+    --primary-foreground: 224 71.4% 4.1%;
+    --primary-glow: 0 84% 75%;
+
+    /* Golden Star - Màu vàng ngôi sao */  
+    --secondary: 45 93% 65%;
+    --secondary-foreground: 224 71.4% 4.1%;
+    --secondary-glow: 45 93% 75%;
+
+    /* Homeland Green - Màu xanh quê hương */
+    --accent: 142 71% 55%;
+    --accent-foreground: 224 71.4% 4.1%;
+    --accent-glow: 142 71% 65%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 0 84% 65%;
+
+    /* Dark mode specific gradients */
+    --gradient-map: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--secondary) / 0.2), hsl(var(--accent) / 0.2));
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Journey Path Animations */
+  .path-draw {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawPath 2s ease-in-out forwards;
+  }
+
+  .character-move {
+    animation: moveCharacter 3s ease-in-out forwards;
+  }
+
+  .story-point {
+    @apply transition-all duration-300 hover:scale-110 cursor-pointer;
+    @apply bg-primary;
+    @apply shadow-[var(--shadow-revolutionary)];
+  }
+
+  .story-point.golden {
+    @apply bg-secondary;
+    @apply shadow-[var(--shadow-golden)];
+  }
+
+  .story-point.homeland {
+    @apply bg-accent;
+    @apply shadow-[var(--shadow-homeland)];
+  }
+
+  .timeline-card {
+    @apply bg-card/60 backdrop-blur-md border border-border/50 rounded-xl p-6;
+    @apply transition-all duration-500 hover:bg-card/80;
+    @apply hover:shadow-[var(--shadow-soft)] hover:scale-105;
+    @apply hover:border-border;
+  }
+
+  .hero-title {
+    @apply text-6xl font-bold bg-gradient-to-r from-primary via-secondary to-accent;
+    @apply bg-clip-text text-transparent;
+    @apply animate-fade-in;
+  }
+}
+
+@layer utilities {
+  .journey-gradient {
+    background: var(--gradient-revolutionary);
+  }
+
+  .golden-gradient {
+    background: var(--gradient-golden);
+  }
+
+  .homeland-gradient {
+    background: var(--gradient-homeland);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+}
+
+/* Journey Keyframe Animations */
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes moveCharacter {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--secondary) / 0.4), 0 0 40px hsl(var(--secondary) / 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(var(--secondary) / 0.6), 0 0 60px hsl(var(--secondary) / 0.3);
+    transform: scale(1.05);
+  }
+}
+
+/* Hint Tooltip Animations */
+@keyframes bounce-gentle {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes point-finger {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* Custom Animation Classes */
+@layer utilities {
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s infinite;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s infinite;
+  }
+  
+  .animate-point-finger {
+    animation: point-finger 1.5s infinite;
+  }
+}
