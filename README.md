@@ -1,73 +1,65 @@
-# Welcome to your Lovable project
+# Ho Chi Minh Journeys Map
 
-## Project info
+Ung dung web tuong tac mo ta hanh trinh 30 nam (1911-1941) cua Chu tich Ho Chi Minh. Du an ket hop ban do, dong thoi gian, thong tin chi tiet va bo cau hoi on tap de ho tro trinh bay lich su mot cach sinh dong va de tiep can.
 
-**URL**: https://lovable.dev/projects/3c93150f-9dd9-4d5d-821e-a0b84a68409f
+## Tinh nang noi bat
+- Ban do hanh trinh voi cac moc dia ly, hinh anh minh hoa va tich hop thong tin chi tiet
+- Dong bo voi dong thoi gian va khu vuc chi tiet giup theo doi dien bien theo nam
+- Che do ke chuyen tu dong (Speech Synthesis) kem nhac nen, dieu chinh toc do doc va dieu khien nhanh
+- Trang tong quan thong ke thong tin quan trong, gach dau dong thanh tuu va cac giai doan chinh
+- Hoi thoai cau do nhanh de kiem tra kien thuc sau khi tham quan du lieu
+- Ho tro che do sang/toi, tuong thich tot voi thiet bi di dong
 
-## How can I edit this code?
+## Cong nghe su dung
+- Vite + React + TypeScript
+- Tailwind CSS va shadcn/ui cho he thong giao dien
+- React Router DOM cho dieu huong trang don
+- Lucide React va cac goi Radix UI ho tro tuong tac, accessibility
+- TanStack Query cho cac logic bat dong bo (neu can bo sung API sau nay)
 
-There are several ways of editing your application.
+## Yeu cau he thong
+- Node.js >= 18
+- npm >= 9 (hoac su dung bun/pnpm/ yarn neu dieu chinh script tuong ung)
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/3c93150f-9dd9-4d5d-821e-a0b84a68409f) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+## Cai dat va chay local
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1. Cai dat phu thuoc
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 2. Chay che do phat trien
 npm run dev
+
+# 3. Xay dung bundle san san xuat
+npm run build
+
+# 4. Xem thu ban build
+npm run preview
+
+# 5. Kiem tra lint
+npm run lint
 ```
 
-**Edit a file directly in GitHub**
+## Cau truc thu muc chinh
+```
+├── public/                 # Static asset phuc vu truc tiep boi Vite
+├── src/
+│   ├── assets/             # Hinh anh, am thanh va du lieu hanh trinh (SVG, MP3...)
+│   ├── components/         # Thanh phan UI: ban do, dong thoi gian, dialog cau do, theming...
+│   ├── pages/              # Trang cap cao (Index) ket hop cac thanh phan
+│   └── lib|hooks (neu co)  # Tien ich chuyen dung
+├── index.html              # Template goc cho Vite
+├── tailwind.config.ts      # Cau hinh Tailwind CSS
+└── vite.config.ts          # Cau hinh build va plugin cua Vite
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Phat trien, dong gop
+- Code duoc viet voi TypeScript; giu typing ro rang va tranh `any`
+- Uu tien viet component co the tai su dung va co comment ngan gon neu doan logic phuc tap
+- Luon chay `npm run lint` truoc khi day code len kho
+- Neu bo sung noi dung lich su moi, nhac cap nhat `JourneyMap`, `Timeline` va `JourneyDetail` de dong bo thong tin
 
-**Use GitHub Codespaces**
+## Phat hanh
+Du an co the duoc build thanh bo static asset (thu muc `dist/`) va trien khai tren bat ky hosting static nao (Netlify, Vercel, GitHub Pages...).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/3c93150f-9dd9-4d5d-821e-a0b84a68409f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Ban quyen
+Noi dung lich su duoc tong hop tu nhieu nguon mo cong cong. Can dam bao tinh chinh xac khi cap nhat thong tin moi.
