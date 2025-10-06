@@ -800,7 +800,7 @@ const Index = () => {
         </div>
       </footer>
 
-      {/* Journey Detail Modal */}
+      {/* Journey Detail Modall */}
       <JourneyDetail 
         point={selectedPoint}
         onClose={handleCloseDetail}
