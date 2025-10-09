@@ -1,4 +1,4 @@
-# Ho Chi Minh Journeys Map (demo: https://hcm202-fptu-asg.netlify.app/)
+# Ho Chi Minh Journeys Map (demo: https://hcm202-fpt.netlify.app/)
 
 Ung dung web tuong tac mo ta hanh trinh 30 nam (1911-1941) cua Chu tich Ho Chi Minh. Du an ket hop ban do, dong thoi gian, thong tin chi tiet va bo cau hoi on tap de ho tro trinh bay lich su mot cach sinh dong va de tiep can.
 
