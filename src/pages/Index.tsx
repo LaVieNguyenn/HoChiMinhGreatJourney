@@ -189,7 +189,7 @@ const Index = () => {
 
     const sortedVoices = [...availableVoices].sort((a, b) => scoreVoice(b) - scoreVoice(a));
     const bestVietnamese = sortedVoices.find((voice) => voice.lang?.toLowerCase().startsWith('vi'));
-    return bestVietnamese ?? sortedVoices[0] ?? null;
+    return bestVietnamese ?? null;
   }, [availableVoices]);
 
   const clampStep = useCallback(
@@ -215,6 +215,13 @@ const Index = () => {
     }
     speechRef.current = null;
   }, []);
+
+  useEffect(() => {
+    if (!preferredVoice && isStoryEnabled) {
+      setIsStoryEnabled(false);
+      setIsStoryPlaying(false);
+    }
+  }, [isStoryEnabled, preferredVoice]);
 
   const playBackgroundMusic = useCallback(async () => {
     const audio = audioRef.current;
@@ -431,7 +438,16 @@ const Index = () => {
     const synth = window.speechSynthesis;
 
     const loadVoices = () => {
-      setAvailableVoices(synth.getVoices());
+      const voices = synth.getVoices();
+      setAvailableVoices(voices);
+
+      if (voices.length && voices.some((voice) => voice.lang?.toLowerCase().startsWith('vi'))) {
+        setSpeechSupported(true);
+      } else if (voices.length) {
+        setSpeechSupported(false);
+        setIsStoryEnabled(false);
+        setIsStoryPlaying(false);
+      }
     };
 
     loadVoices();
@@ -574,12 +590,23 @@ const Index = () => {
     setSelectedPoint(null);
   };
 
+  const handleStartExplore = useCallback(() => {
+    if (typeof window === 'undefined') return;
+
+    const mapSection = document.getElementById('map-section');
+    if (mapSection) {
+      setIsScrolling(true);
+      mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => setIsScrolling(false), 1000);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* QR code quick access */}
       <div className="fixed bottom-6 right-6 z-40 hidden sm:flex flex-col items-center gap-2 rounded-xl border border-border bg-card/90 p-4 shadow-lg backdrop-blur">
         <a
-          href="https://hcm202-fptu-asg.netlify.app/"
+          href="https://hcm202-fpt.netlify.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center gap-2"
@@ -588,7 +615,7 @@ const Index = () => {
             Quét mã để mở trang web
           </span>
           <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fhcm202-fptu-asg.netlify.app%2F"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fhcm202-fpt.netlify.app%2F"
             alt="QR code dẫn đến trang web hành trình Hồ Chí Minh."
             className="h-32 w-32"
           />
@@ -599,18 +626,18 @@ const Index = () => {
       <ThemeToggle />
       
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden py-12 sm:py-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden py-12 sm:py-20">
         <div className="absolute inset-0 bg-[var(--gradient-hero)]" />
 
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-30">
           <VietnamFlag size="lg" className="animate-fade-in" />
         </div>
 
-        <div className="relative z-20 w-full px-6">
-          <div className="mx-auto flex max-w-5xl flex-col gap-10 xl:flex-row xl:items-end xl:justify-between">
+        <div className="relative z-20 w-full px-4 sm:px-8">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 xl:flex-row xl:items-end xl:justify-between">
             <div className="max-w-2xl space-y-6 text-left">
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-2 text-xs sm:text-sm font-semibold text-primary shadow-sm shadow-primary/30">
-                1911 → 1941 • 5 châu lục • 30 dấu mốc
+                1911 → 1941 • 4 châu lục • 30 dấu mốc
               </span>
               <h1 className="hero-title drop-shadow-sm text-left text-5xl sm:text-6xl">
                 Hành Trình Tìm Đường Cứu Nước
@@ -619,24 +646,28 @@ const Index = () => {
                 Theo dấu Chủ tịch Hồ Chí Minh suốt 30 năm bôn ba – từ Bến Nhà Rồng băng qua Á, Âu, Mỹ, cho tới ngày trở lại Pác Bó lãnh đạo dân tộc giành độc lập.
               </p>
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
-                <Button size="lg" className="w-full sm:w-auto px-8 font-semibold shadow-lg shadow-primary/40">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto px-10 font-semibold shadow-lg shadow-primary/40"
+                  onClick={handleStartExplore}
+                >
                   Bắt đầu khám phá
                 </Button>
                 <div className="flex items-center gap-3 text-xs sm:text-sm text-muted-foreground">
                   <div className="flex -space-x-3">
                     <div className="h-9 w-9 rounded-full border border-background/70 bg-card/80 flex items-center justify-center font-semibold">30</div>
-                    <div className="h-9 w-9 rounded-full border border-background/70 bg-card/80 flex items-center justify-center font-semibold">5</div>
+                    <div className="h-9 w-9 rounded-full border border-background/70 bg-card/80 flex items-center justify-center font-semibold">4</div>
                     <div className="h-9 w-9 rounded-full border border-background/70 bg-card/80 flex items-center justify-center font-semibold">1</div>
                   </div>
                   <div className="space-y-1">
-                    <p>30 câu chuyện • 5 châu lục • 1 niềm tin tất thắng</p>
+                    <p>30 câu chuyện • 4 châu lục • 1 niềm tin tất thắng</p>
                     <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-primary/70">Tương tác • Trực quan • Đa phương tiện</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="w-full xl:w-80 space-y-4">
+            <div className="w-full xl:w-[420px] space-y-6">
               <div className="relative overflow-hidden rounded-2xl border border-border/40 shadow-xl shadow-primary/20 bg-card/70 backdrop-blur">
                 <img
                   src={heroBacHoNhaRong}
@@ -659,7 +690,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <p className="text-[11px] uppercase tracking-[0.35em] text-white/70">1911 → 1941</p>
-                  <p className="text-lg font-semibold leading-tight">Ba mươi năm bôn ba khắp 5 châu lục tìm ánh sáng tự do</p>
+                  <p className="text-lg font-semibold leading-tight">Ba mươi năm bôn ba khắp 4 châu lục tìm ánh sáng tự do</p>
                 </div>
               </div>
             </div>
@@ -754,7 +785,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-semibold mb-3 text-foreground">Tầm Nhìn Toàn Cầu</h3>
               <p className="text-muted-foreground leading-relaxed">
-                30 năm bôn ba khắp 5 châu lục, tích lũy kinh nghiệm và hiểu biết sâu sắc về thế giới
+                30 năm bôn ba khắp 4 châu lục, tích lũy kinh nghiệm và hiểu biết sâu sắc về thế giới
               </p>
             </div>
             
